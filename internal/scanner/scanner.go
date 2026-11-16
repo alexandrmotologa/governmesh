@@ -142,6 +142,7 @@ func (s *Scanner) Run(rootDir string) (*ScanResult, error) {
 		Assets:         allAssets,
 		RiskSummary:    make(map[config.RiskLevel]int),
 		HashChain:      hashChain,
+		Monorepo:       DetectMonorepo(absRoot, allAssets),
 	}
 
 	return result, nil

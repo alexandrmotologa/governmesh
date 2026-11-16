@@ -1,0 +1,451 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "governmesh",
+          "version": "1.0.0",
+          "informationUri": "https://github.com/alexandrmotologa/governmesh",
+          "rules": [
+            {
+              "id": "GM-EUAI-ART5",
+              "name": "EUAIActArticle5Prohibited",
+              "shortDescription": {
+                "text": "EU AI Act Article 5 Prohibited AI Practice"
+              },
+              "fullDescription": {
+                "text": "The system implements prohibited capabilities (e.g. social scoring, subliminal manipulation, or unauthorized biometrics) banned under EU law."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            },
+            {
+              "id": "GM-EUAI-ANNEX3",
+              "name": "EUAIActAnnexIIIHighRisk",
+              "shortDescription": {
+                "text": "EU AI Act Annex III High-Risk AI Classification"
+              },
+              "fullDescription": {
+                "text": "AI system deployed in sensitive domain (recruitment, credit scoring, healthcare, critical infrastructure) requiring strict conformity."
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              }
+            },
+            {
+              "id": "GM-EUAI-ART50",
+              "name": "EUAIActArticle50Transparency",
+              "shortDescription": {
+                "text": "EU AI Act Article 50 User Disclosure Required"
+              },
+              "fullDescription": {
+                "text": "Conversational bot or synthetic media generator requiring mandatory user disclosure notice."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              }
+            },
+            {
+              "id": "GM-DATA-PII",
+              "name": "SensitiveDataEgressViolation",
+              "shortDescription": {
+                "text": "Unmasked PII/PHI egressing to external cloud LLM"
+              },
+              "fullDescription": {
+                "text": "Personal identifier or health information variable bound into prompt template egressing to public cloud API."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "error",
+          "message": {
+            "text": "Sensitive data exposure (pii_national_id): National identification number variable binding in variable {candidate_ssn}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "prompts/hr_eval.prompt"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "error",
+          "message": {
+            "text": "Sensitive data exposure (phi_medical): Protected Health Information (PHI) variable binding in variable {patient_medical_history}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "prompts/hr_eval.prompt"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-EUAI-ANNEX3",
+          "level": "warning",
+          "message": {
+            "text": "[high] claude-3-5-sonnet: AI used for creditworthiness evaluation, loan eligibility, or emergency service dispatch is classified High-Risk Annex III Section 5. Triggered by context identifier: 'credit_score'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "error",
+          "message": {
+            "text": "Sensitive data exposure (pii_national_id): National identification number variable binding in variable {candidate_ssn}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {salary_expectation}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {credit_score}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {bank_account}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-EUAI-ANNEX3",
+          "level": "warning",
+          "message": {
+            "text": "[high] gpt-4o: AI used for creditworthiness evaluation, loan eligibility, or emergency service dispatch is classified High-Risk Annex III Section 5. Triggered by context identifier: 'credit_score'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "error",
+          "message": {
+            "text": "Sensitive data exposure (pii_national_id): National identification number variable binding in variable {candidate_ssn}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {salary_expectation}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {credit_score}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {bank_account}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-EUAI-ANNEX3",
+          "level": "warning",
+          "message": {
+            "text": "[high] gpt-4o-mini: AI used for creditworthiness evaluation, loan eligibility, or emergency service dispatch is classified High-Risk Annex III Section 5. Triggered by context identifier: 'credit_score'."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 2,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "error",
+          "message": {
+            "text": "Sensitive data exposure (pii_national_id): National identification number variable binding in variable {candidate_ssn}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {salary_expectation}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {credit_score}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (financial): Financial data or credit rating variable binding in variable {bank_account}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "app.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-EUAI-ART50",
+          "level": "note",
+          "message": {
+            "text": "[transparency] gpt-4o-mini: Conversational Foundation Model API in customer-facing or interactive context. Article 50 requires transparency notices."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "edge_service.ts"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "GM-DATA-PII",
+          "level": "warning",
+          "message": {
+            "text": "Sensitive data exposure (pii_personal): Personal contact and identity information binding in variable {user_email}"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "edge_service.ts"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

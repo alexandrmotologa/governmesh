@@ -11,6 +11,7 @@ import (
 	"github.com/alexandrmotologa/governmesh/internal/attestation"
 	"github.com/alexandrmotologa/governmesh/internal/classifier"
 	"github.com/alexandrmotologa/governmesh/internal/config"
+	"github.com/alexandrmotologa/governmesh/internal/remediation"
 	"github.com/alexandrmotologa/governmesh/internal/report"
 	"github.com/alexandrmotologa/governmesh/internal/scanner"
 )
@@ -50,6 +51,9 @@ func (s *Server) RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("/api/attestation", s.handleAttestation)
 	mux.HandleFunc("/api/report/html", s.handleReportHTML)
 	mux.HandleFunc("/api/report/md", s.handleReportMD)
+	mux.HandleFunc("/api/annex-iv", s.handleAnnexIV)
+	mux.HandleFunc("/api/sarif", s.handleSARIF)
+	mux.HandleFunc("/api/remediation", s.handleRemediation)
 	mux.HandleFunc("/api/verify", s.handleVerify)
 }
 
@@ -132,10 +136,8 @@ func (s *Server) handleScan(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Classify
 	classifier.ProcessScanResult(res, s.cfg)
 
-	// AIBOM & Attestation
 	cdx, _ := aibom.GenerateCycloneDX(res)
 	spdxDoc, _ := aibom.GenerateSPDX(res)
 	cdxBytes, _ := cdx.ToJSON()
@@ -225,6 +227,69 @@ func (s *Server) handleReportMD(w http.ResponseWriter, r *http.Request) {
 	mdContent := report.GenerateMarkdownReport(res, att)
 	w.Header().Set("Content-Type", "text/markdown; charset=utf-8")
 	w.Write([]byte(mdContent))
+}
+
+func (s *Server) handleAnnexIV(w http.ResponseWriter, r *http.Request) {
+	s.mu.RLock()
+	res := s.lastResult
+	att := s.lastAttest
+	s.mu.RUnlock()
+
+	if res == nil {
+		http.Error(w, "No scan result available.", http.StatusNotFound)
+		return
+	}
+
+	doc := report.GenerateAnnexIVDossier(res, att)
+	w.Header().Set("Content-Type", "text/markdown; charset=utf-8")
+	w.Write([]byte(doc))
+}
+
+func (s *Server) handleSARIF(w http.ResponseWriter, r *http.Request) {
+	s.mu.RLock()
+	res := s.lastResult
+	s.mu.RUnlock()
+
+	if res == nil {
+		http.Error(w, "No scan result available.", http.StatusNotFound)
+		return
+	}
+
+	sarifDoc, err := report.GenerateSARIF(res)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	data, _ := sarifDoc.ToJSON()
+	w.Write(data)
+}
+
+func (s *Server) handleRemediation(w http.ResponseWriter, r *http.Request) {
+	s.mu.RLock()
+	res := s.lastResult
+	target := s.targetDir
+	s.mu.RUnlock()
+
+	if res == nil {
+		http.Error(w, "No scan result available.", http.StatusNotFound)
+		return
+	}
+
+	fixes, err := remediation.PlanFixes(res, target)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	diff := remediation.GenerateUnifiedDiff(fixes)
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"fixes": fixes,
+		"diff":  diff,
+	})
 }
 
 func (s *Server) handleVerify(w http.ResponseWriter, r *http.Request) {

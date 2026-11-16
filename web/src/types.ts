@@ -49,6 +49,18 @@ export interface PIIExposure {
   is_prohibited: boolean;
 }
 
+export interface Microservice {
+  name: string;
+  path: string;
+  tech_stack: string;
+  asset_ids: string[];
+}
+
+export interface MonorepoInspection {
+  is_monorepo: boolean;
+  services: Microservice[];
+}
+
 export interface ScanResult {
   project_name: string;
   scanned_path: string;
@@ -63,6 +75,7 @@ export interface ScanResult {
   hash_chain: string;
   passed_quality_gate: boolean;
   gate_failures?: string[];
+  monorepo?: MonorepoInspection;
 }
 
 export interface AttestationManifest {
@@ -77,4 +90,18 @@ export interface AttestationManifest {
   file_tree_hashes: Record<string, string>;
   risk_signature: string;
   signature_block: string;
+}
+
+export interface ProposedFix {
+  file_path: string;
+  line: number;
+  type: string;
+  description: string;
+  original_text: string;
+  remediated_text: string;
+}
+
+export interface RemediationPayload {
+  fixes: ProposedFix[];
+  diff: string;
 }

@@ -8,9 +8,12 @@ Automated technical auditing and AI Bill of Materials (AIBOM) generator in Go (<
 - **Automated EU AI Act Risk Tiering**: Classifies discovered models into the 4 statutory tiers: Unacceptable Risk (Article 5 Prohibitions), High-Risk (Annex III Employment, Credit, Critical Infrastructure), Specific Transparency (Article 50 Chatbots), and Minimal Risk (Article 69).
 - **CycloneDX 1.6 & SPDX 3.0 AIBOM Generation**: Exports machine learning software supply chain inventories (`aibom.json`) including model cards, providers, parameters, and licensing data.
 - **Sensitive Data & PII Egress Detection**: Scans prompt templates and runtime variable interpolations for SSN, IBAN, credit cards, emails, and health records sent to third-party cloud LLM APIs.
+- **EU AI Act Annex IV Technical Documentation Generator**: Assembles the statutory technical dossier required under Article 11 for High-Risk AI deployments (`governmesh docgen`).
+- **Automated Code Remediation & Patch Engine**: Plans targeted compliance code fixes, privacy safeguards, and Article 50 disclosure notices, generating unified git patches (`governmesh fix`).
+- **SARIF v2.1.0 Export**: Produces standardized OASIS SARIF reports for native GitHub Actions security alerts and pull request line annotations (`--sarif`).
 - **Cryptographic Attestation & Merkle Chains**: Computes SHA-256 hash chains across all scanned files and generated AIBOM documents, outputting a verifiable attestation manifest.
 - **CI/CD Quality Gate**: Returns deterministic non-zero exit codes to block builds when prohibited practices or unmitigated high risks are detected.
-- **Embedded React 19 Governance Studio**: Single-binary local console served at `http://localhost:6363` with risk matrices, interactive inventory explorer, and one-click report generation.
+- **Embedded React 19 Governance Studio**: Single-binary local console served at `http://localhost:6363` with risk matrices, interactive inventory explorer, remediation diff viewer, and Annex IV dossier generator.
 
 ## Installation
 
@@ -40,11 +43,24 @@ governmesh scan \
   --aibom aibom.json \
   --attestation attestation.json \
   --report compliance_report.html \
+  --sarif results.sarif \
   --fail-on unacceptable \
   ./path/to/codebase
 ```
 
-### 2. Generate Authoritative AIBOM
+### 2. Generate EU AI Act Annex IV Technical Dossier
+
+```bash
+governmesh docgen --output annex_iv_dossier.md ./path/to/codebase
+```
+
+### 3. Generate Code Remediations and Git Patch
+
+```bash
+governmesh fix --output-patch remediation.patch ./path/to/codebase
+```
+
+### 4. Generate Authoritative AIBOM
 
 ```bash
 # CycloneDX 1.6 format
@@ -54,7 +70,7 @@ governmesh aibom --format cyclonedx --output aibom.json ./path/to/codebase
 governmesh aibom --format spdx --output aibom_spdx.json ./path/to/codebase
 ```
 
-### 3. Verify Cryptographic Integrity
+### 5. Verify Cryptographic Integrity
 
 Inspect an audit bundle to detect if source code or AIBOM contents were modified after signing:
 
@@ -65,7 +81,7 @@ governmesh verify \
   --path ./path/to/codebase
 ```
 
-### 4. Compare Snapshots with Diff
+### 6. Compare Snapshots with Diff
 
 Detect newly introduced models or risk tier escalations between versions:
 
@@ -73,7 +89,7 @@ Detect newly introduced models or risk tier escalations between versions:
 governmesh diff --base v1_aibom.json --target v2_aibom.json
 ```
 
-### 5. Launch Governance Studio
+### 7. Launch Governance Studio
 
 Launch the embedded React 19 studio console:
 
@@ -87,7 +103,9 @@ Open `http://localhost:6363` in your browser.
 
 | Command | Purpose | Key Flags |
 | :--- | :--- | :--- |
-| `scan` | Complete codebase audit, tiering, and gate evaluation | `--config`, `--aibom`, `--attestation`, `--report`, `--fail-on`, `--json` |
+| `scan` | Complete codebase audit, tiering, and gate evaluation | `--config`, `--aibom`, `--attestation`, `--report`, `--sarif`, `--docgen`, `--fail-on`, `--json` |
+| `docgen` | Generate statutory EU AI Act Annex IV technical dossier | `--output`, `--config` |
+| `fix` | Plan compliance code remediations and produce git patch | `--output-patch`, `--dry-run`, `--config` |
 | `aibom` | Synthesize authoritative AIBOM JSON | `--format` (cyclonedx, spdx), `--output` |
 | `verify` | Verify cryptographic SHA-256 Merkle chain | `--manifest`, `--aibom`, `--path` |
 | `report` | Generate executive audit document | `--format` (html, md), `--output`, `--path` |

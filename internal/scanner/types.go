@@ -54,4 +54,5 @@ type ScanResult struct {
 	HashChain         string                   `json:"hash_chain"`       // Merkle root of all scanned components
 	PassedQualityGate bool                     `json:"passed_quality_gate"`
 	GateFailures      []string                 `json:"gate_failures,omitempty"`
+	Monorepo          *MonorepoInspection      `json:"monorepo,omitempty"`
 }

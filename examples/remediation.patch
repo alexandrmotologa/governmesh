@@ -1,0 +1,20 @@
+--- a/app.py
++++ b/app.py
+@@ -2,1 +2,2 @@
+-from openai import OpenAI
++  # [EU AI Act Article 14]: Mandatory Human-in-the-Loop review checkpoint required prior to decision enforcement.
+from openai import OpenAI
+@@ -2,1 +2,2 @@
+-from openai import OpenAI
++  # [EU AI Act Article 14]: Mandatory Human-in-the-Loop review checkpoint required prior to decision enforcement.
+from openai import OpenAI
+@@ -2,1 +2,2 @@
+-from openai import OpenAI
++  # [EU AI Act Article 14]: Mandatory Human-in-the-Loop review checkpoint required prior to decision enforcement.
+from openai import OpenAI
+--- a/edge_service.ts
++++ b/edge_service.ts
+@@ -1,1 +1,2 @@
+-import { generateText } from "ai";
++  # [EU AI Act Article 50]: Mandatory user disclosure header enforced.
+import { generateText } from "ai";

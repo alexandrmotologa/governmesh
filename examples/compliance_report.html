@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Governance & Regulatory Audit Report - Enterprise Core AI Services</title>
+<style>
+  :root {
+    --bg: #090d16;
+    --surface: #111827;
+    --surface-border: #1f2937;
+    --text: #f3f4f6;
+    --text-muted: #9ca3af;
+    --primary: #3b82f6;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --success: #10b981;
+    --purple: #8b5cf6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 2.5rem 1.5rem;
+    line-height: 1.5;
+  }
+  .container { max-width: 1080px; margin: 0 auto; }
+  header {
+    border-bottom: 1px solid var(--surface-border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  h1 { font-size: 1.85rem; font-weight: 700; color: #fff; margin-bottom: 0.35rem; }
+  .subtitle { color: var(--text-muted); font-size: 0.95rem; }
+  .badge {
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .badge-pass { background-color: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+  .badge-fail { background-color: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+  }
+  .card-title { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-bottom: 0.5rem; }
+  .card-value { font-size: 1.75rem; font-weight: 700; color: #fff; }
+  section { margin-bottom: 2.5rem; }
+  h2 { font-size: 1.25rem; font-weight: 600; color: #fff; margin-bottom: 1rem; border-left: 3px solid var(--primary); padding-left: 0.75rem; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--surface-border); border-radius: 8px; overflow: hidden; margin-bottom: 1rem; }
+  th, td { padding: 0.75rem 1rem; text-align: left; font-size: 0.875rem; }
+  th { background: #1a2234; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--surface-border); }
+  tr:not(:last-child) td { border-bottom: 1px solid var(--surface-border); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.825rem; background: rgba(255,255,255,0.06); padding: 0.15rem 0.4rem; border-radius: 4px; }
+  .tier-unacceptable { color: #f87171; font-weight: 600; }
+  .tier-high { color: #fbbf24; font-weight: 600; }
+  .tier-transparency { color: #60a5fa; font-weight: 600; }
+  .tier-minimal { color: #34d399; font-weight: 600; }
+  .attestation-block { background: #0c111d; border: 1px solid var(--surface-border); border-radius: 8px; padding: 1.25rem; font-family: monospace; font-size: 0.8rem; overflow-x: auto; color: #94a3b8; }
+  @media print {
+    body { background: #fff; color: #111; padding: 0; }
+    .card, table, .attestation-block { border-color: #ddd; background: #fff; color: #111; }
+    th { background: #f3f4f6; color: #333; }
+    code { background: #eee; color: #000; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>AI Regulatory Compliance & Governance Audit</h1>
+      <div class="subtitle">Target: <strong>Enterprise Core AI Services</strong> | Date: Tue, 17 Nov 2026 00:28:05 EET</div>
+    </div>
+    <div>
+      <span class="badge badge-fail">NON-COMPLIANT</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">Compliance Score</div>
+      <div class="card-value" style="color: var(--danger)">0.0%</div>
+    </div>
+    <div class="card">
+      <div class="card-title">AI Models Discovered</div>
+      <div class="card-value">6</div>
+    </div>
+    <div class="card">
+      <div class="card-title">High & Unacceptable Risks</div>
+      <div class="card-value" style="color: var(--danger)">3</div>
+    </div>
+    <div class="card">
+      <div class="card-title">PII Data Exposures</div>
+      <div class="card-value" style="color: var(--warning)">13</div>
+    </div>
+  </div>
+
+  <section>
+    <h2>Compliance Gate Warnings</h2>
+    <div style="background: rgba(239,68,68,0.1); border: 1px solid var(--danger); border-radius: 8px; padding: 1rem;">
+      <ul style="padding-left: 1.5rem; color: #fca5a5;">
+<li>GATE FAILED: 3 critical PII/PHI variable(s) egressing to external cloud LLM providers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>EU AI Act Risk Distribution</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Risk Tier</th>
+          <th>Regulatory Basis</th>
+          <th>Discovered Systems</th>
+          <th>Conformity Mandate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tier-unacceptable">Unacceptable Risk</span></td>
+          <td>Article 5 (Prohibited AI Practices)</td>
+          <td><strong>0</strong></td>
+          <td>Hard CI/CD gate block & prohibited use remediation</td>
+        </tr>
+        <tr>
+          <td><span class="tier-high">High-Risk</span></td>
+          <td>Article 6 & Annex III (Employment, Credit, Critical)</td>
+          <td><strong>3</strong></td>
+          <td>Risk management, data governance, human oversight</td>
+        </tr>
+        <tr>
+          <td><span class="tier-transparency">Specific Transparency</span></td>
+          <td>Article 50 (Chatbots, Synthetic Media)</td>
+          <td><strong>0</strong></td>
+          <td>Mandatory AI user disclosure notices</td>
+        </tr>
+        <tr>
+          <td><span class="tier-minimal">Minimal Risk</span></td>
+          <td>Article 69 (General Internal Use)</td>
+          <td><strong>3</strong></td>
+          <td>Permitted with standard AIBOM tracking</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Discovered AI Bill of Materials (AIBOM)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Model / Component</th>
+          <th>Provider</th>
+          <th>Framework</th>
+          <th>Risk Tier</th>
+          <th>Egress Target</th>
+          <th>Source Code Location</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><strong>vllm/vllm-openai:latest</strong></td>
+          <td>Self-Hosted / Container Runtime</td>
+          <td><code>vllm-container</code></td>
+          <td><span class="tier-minimal">minimal</span></td>
+          <td><code>local_runtime</code></td>
+          <td><code>Dockerfile:1</code></td>
+        </tr>
+        <tr>
+          <td><strong>mistralai/Mistral-7B-Instruct-v0.3</strong></td>
+          <td>Environment Injected Provider</td>
+          <td><code>env-config</code></td>
+          <td><span class="tier-minimal">minimal</span></td>
+          <td><code>external_cloud</code></td>
+          <td><code>Dockerfile:1</code></td>
+        </tr>
+        <tr>
+          <td><strong>gpt-4o</strong></td>
+          <td>OpenAI</td>
+          <td><code>langchain</code></td>
+          <td><span class="tier-high">high</span></td>
+          <td><code>external_cloud</code></td>
+          <td><code>app.py:2</code></td>
+        </tr>
+        <tr>
+          <td><strong>gpt-4o-mini</strong></td>
+          <td>OpenAI</td>
+          <td><code>langchain</code></td>
+          <td><span class="tier-high">high</span></td>
+          <td><code>external_cloud</code></td>
+          <td><code>app.py:2</code></td>
+        </tr>
+        <tr>
+          <td><strong>claude-3-5-sonnet</strong></td>
+          <td>Anthropic</td>
+          <td><code>langchain</code></td>
+          <td><span class="tier-high">high</span></td>
+          <td><code>external_cloud</code></td>
+          <td><code>app.py:2</code></td>
+        </tr>
+        <tr>
+          <td><strong>gpt-4o-mini</strong></td>
+          <td>OpenAI</td>
+          <td><code>vercel-ai/openai</code></td>
+          <td><span class="tier-minimal">minimal</span></td>
+          <td><code>external_cloud</code></td>
+          <td><code>edge_service.ts:1</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Sensitive Data & PII Egress Audit</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Source File</th>
+          <th>Line</th>
+          <th>PII Type</th>
+          <th>Target Cloud</th>
+          <th>Redacted Sample</th>
+          <th>Prohibited Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>pii_national_id</code></td>
+          <td>OpenAI</td>
+          <td><code>{candidate_ssn}</code></td>
+          <td><span style="color: var(--danger); font-weight: bold;">VIOLATION</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>OpenAI</td>
+          <td><code>{salary_expectation}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>OpenAI</td>
+          <td><code>{credit_score}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>OpenAI</td>
+          <td><code>{bank_account}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>pii_national_id</code></td>
+          <td>OpenAI</td>
+          <td><code>{candidate_ssn}</code></td>
+          <td><span style="color: var(--danger); font-weight: bold;">VIOLATION</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>OpenAI</td>
+          <td><code>{salary_expectation}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>OpenAI</td>
+          <td><code>{credit_score}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>OpenAI</td>
+          <td><code>{bank_account}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>pii_national_id</code></td>
+          <td>Anthropic</td>
+          <td><code>{candidate_ssn}</code></td>
+          <td><span style="color: var(--danger); font-weight: bold;">VIOLATION</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>Anthropic</td>
+          <td><code>{salary_expectation}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>Anthropic</td>
+          <td><code>{credit_score}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>app.py</code></td>
+          <td>1</td>
+          <td><code>financial</code></td>
+          <td>Anthropic</td>
+          <td><code>{bank_account}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+        <tr>
+          <td><code>edge_service.ts</code></td>
+          <td>1</td>
+          <td><code>pii_personal</code></td>
+          <td>OpenAI</td>
+          <td><code>{user_email}</code></td>
+          <td><span style="color: var(--text-muted)">Permitted</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section>
+    <h2>Cryptographic Attestation & Audit Trail</h2>
+    <div class="attestation-block">
+      <div>Algorithm: SHA-256-MERKLE</div>
+      <div>Signer: enterprise-security-auditor (Corporate AI Ethics Committee)</div>
+      <div>Attestation Timestamp: 2026-11-16T22:28:05Z</div>
+      <div>Merkle Root Hash: <code>5ee2be7328db07cb0bf277258f5d4f735b2a8a2d3947649a08bbcc1bd47354d8</code></div>
+      <div>AIBOM Checksum: <code>2a0b1e725d6a22e7e2c5fb48fc4e49c52676b14bdff1a33c9f706555b0ae3ae2</code></div>
+      <div>Cryptographic Signature Block: <code>d2e1dbc8169c6a43028c0c4f80d0997409452be2ba387a0aaff71dc8de5898a7</code></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "project_name": "Enterprise Core AI Services",
+  "timestamp": "2026-11-16T22:28:05Z",
+  "signer": "enterprise-security-auditor",
+  "organization": "Corporate AI Ethics Committee",
+  "algorithm": "SHA-256-MERKLE",
+  "root_hash": "5ee2be7328db07cb0bf277258f5d4f735b2a8a2d3947649a08bbcc1bd47354d8",
+  "aibom_hash": "2a0b1e725d6a22e7e2c5fb48fc4e49c52676b14bdff1a33c9f706555b0ae3ae2",
+  "file_tree_hashes": {
+    "Dockerfile": "c954ece1169ee65012af682f5b4700796671da864f9fef8496b39a192c995e23",
+    "app.py": "d2d570c89814f022ca33cfd500043104545110a31aa4162c19c0c3afabe6c4c0",
+    "edge_service.ts": "6fe4e2a0c353780baf01def30e25e5e3a3ffd124345a91030e76215ac46ea286"
+  },
+  "risk_signature": "c1b5733a9f07109d80b58b3bf1fde809c1074001b52903668becba0d719f5b00",
+  "signature_block": "d2e1dbc8169c6a43028c0c4f80d0997409452be2ba387a0aaff71dc8de5898a7"
+}

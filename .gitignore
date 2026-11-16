@@ -1,0 +1,30 @@
+# Binaries
+bin/
+governmesh
+governmesh.exe
+*.exe
+
+# Go
+vendor/
+go.work
+*.test
+*.out
+
+# Node / Web
+node_modules/
+web/node_modules/
+web/dist/
+web/.vite/
+
+# OS and Editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Audit outputs
+*.pdf
+tmp/
+scratch/

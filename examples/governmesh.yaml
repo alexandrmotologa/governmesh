@@ -1,0 +1,32 @@
+version: "1.0.0"
+project_name: "Enterprise Core AI Services"
+
+scan:
+  include_extensions:
+    - ".py"
+    - ".ts"
+    - ".tsx"
+    - ".js"
+    - ".go"
+    - ".yaml"
+    - ".yml"
+    - "Dockerfile"
+  exclude_paths:
+    - ".git"
+    - "node_modules"
+    - "vendor"
+    - ".venv"
+  max_file_size_mb: 10
+  scan_pii: true
+  scan_manifests: true
+
+compliance:
+  fail_on_risk_level: "unacceptable" # Block build on Article 5 prohibited systems
+  fail_on_pii_egress: true           # Block build if critical PII/PHI egresses to public cloud
+  enforce_human_review: true
+  target_standard: "eu_ai_act"
+
+attestation:
+  sign_report: true
+  signer_name: "enterprise-security-auditor"
+  organization: "Corporate AI Ethics Committee"
